@@ -203,3 +203,5 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
     }, 500);
   });
 }
+
+export { users, questions };
