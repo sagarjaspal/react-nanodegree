@@ -1,16 +1,17 @@
 import React from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeUser } from "../../actions/authedUserActions";
 import { bindActionCreators } from "redux";
 
-const handleLogOut = (e, removeUser) => {
+const handleLogOut = (e, removeUser, history) => {
   e.preventDefault();
   removeUser();
-  return <Redirect to="/" />;
+  console.log("history", history);
+  return history.push("/");
 };
 
-const Nav = ({ user, removeUser }) => {
+const Nav = ({ user, removeUser, history }) => {
   return (
     <ul className="nav nav-tabs">
       <li className="nav-items">
@@ -35,7 +36,7 @@ const Nav = ({ user, removeUser }) => {
       <li className="nav-items disabled">{`Hello ${user.name}!`}</li>
       <li
         className="nav-items nav-link"
-        onClick={(e) => handleLogOut(e, removeUser)}
+        onClick={(e) => handleLogOut(e, removeUser, history)}
       >
         Logout
       </li>
@@ -50,4 +51,4 @@ const mapStateToProps = ({ authedUser, users }) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ removeUser }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav));

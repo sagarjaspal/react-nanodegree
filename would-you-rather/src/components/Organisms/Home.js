@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
-import { handleGetAllQuestions } from "../../actions/questionActions";
 import QuestionList from "../Molecules/QuestionList";
 import { Redirect } from "react-router-dom";
 
@@ -10,13 +8,6 @@ class Home extends Component {
   state = {
     tabToRender: "unanswered",
   };
-
-  componentDidMount() {
-    const { handleGetAllQuestions, questions } = this.props;
-    if (!questions || Object.keys(questions).length === 0) {
-      handleGetAllQuestions();
-    }
-  }
 
   setUnanswered = (e) => {
     e.preventDefault();
@@ -107,7 +98,4 @@ const mapStateToProps = ({ questions, users, authedUser }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ handleGetAllQuestions }, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home);

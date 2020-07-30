@@ -16,7 +16,6 @@ class Login extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e.target.value);
     this.setState({ authedUser: e.target.value });
   };
 

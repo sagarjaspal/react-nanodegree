@@ -187,7 +187,8 @@ const mapStateToProps = ({ users, questions, authedUser }, { match }) => {
     user !== null && Object.keys(user.answers).includes(id)
       ? user.answers[id]
       : null;
-  const authorId = Object.keys(questions).length > 0 && questions[id].author;
+  const authorId =
+    Object.keys(questions).length > 0 && questions[id] && questions[id].author;
 
   return {
     author: users[authorId],
